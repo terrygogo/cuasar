@@ -1,28 +1,11 @@
 <template>
-  <q-card>
-    <q-card-title class="card-title bg-teal text-white">
-      {{cardTitle}}
-           <q-icon slot="right" name="more_vert">
-                  <q-popover ref="popover">
-    <q-fab color="primary" active-icon="close" direction="up" ref="apps_fab">
-        <q-fab-action color="purple" @click.native="type = 'bar'"  icon="mail">
-          <q-tooltip anchor="center left" self="top middle" :offset="[20, 0]">bar</q-tooltip>
-        </q-fab-action>
-        <q-fab-action color="secondary" @click.native="type = 'horizontalBar'" icon="alarm">
-          <q-tooltip anchor="center left" self="top middle" :offset="[20, 0]">hbar</q-tooltip>
-        </q-fab-action>
-        <q-fab-action color="secondary" @click.native="type = 'pie'" icon="alarm">
-          <q-tooltip anchor="center left" self="top middle" :offset="[20, 0]">pie</q-tooltip>
-        </q-fab-action>
-     </q-fab>
-   
-         </q-popover>
-                </q-icon>
-    </q-card-title>
+  <card-template  :card-title="cardTitle" :base-color="baseColor" :icon-name="iconName" :what="what"
+                :period="period"  :id="id" >
+  
     <q-card-main class="card-content">
      <pulse-chart :chart-data="datacollection"></pulse-chart>
     </q-card-main>
-  </q-card>
+   </card-template>
 </template>
 <script type = "text/javascript" >
   /* eslint-disable */
@@ -57,6 +40,7 @@
     AppFullscreen
   } from 'quasar'
   import pulseChart from './pulseChart.js'
+  import cardTemplate from './cardTemplate.vue'
   export default ({
     components: {
       Toast,
@@ -87,7 +71,8 @@
       QItemMain,
       QKnob,
       AppFullscreen,
-      pulseChart
+      pulseChart,
+      cardTemplate
     },
     data() {
       return {
@@ -96,11 +81,15 @@
       }
     },
     props: {
+      id: {},
       cdata: {
         required: true
       },
+      baseColor: '',
+      iconName: '',
+      what: '',
+      period: '',
       labels: {
-
       },
       cardTitle: {
         default () {

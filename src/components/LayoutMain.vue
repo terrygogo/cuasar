@@ -196,7 +196,7 @@
   
     <q-toolbar style="height:30px" slot="footer" height="240px">
       <q-toolbar-title>
-        <div slot="subtitle">JionLab Co.,LTD 2017 (주)지온공작소</div>
+        <div slot="subtitle">JionLab Co.,LTD 2018 (주)지온공작소</div>
   
       </q-toolbar-title>
       <!-- 
@@ -238,7 +238,6 @@ import Vue from 'vue'
 import pkg from 'package'
 import {
   Toast,
-  Dialog,
   QAjaxBar,
   openURL,
   QLayout,
@@ -297,53 +296,6 @@ export default {
   },
   data() {
     return {
-      dialog: {
-        label: 'Multiple Selection',
-        icon: 'check_box',
-        handler() {
-          Dialog.create({
-            title: 'Checkbox & Toggle',
-            message: 'Message can be used for all types of Dialogs.',
-            form: {
-              header1: {
-                type: 'heading',
-                label: 'Checkboxes'
-              },
-              group1: {
-                type: 'checkbox',
-                model: ['opt3'],
-                items: [
-                  { label: 'Option 1', value: 'opt1' },
-                  { label: 'Option 2', value: 'opt2', color: 'secondary' },
-                  { label: 'Option 3', value: 'opt3', color: 'amber' }
-                ]
-              },
-              header2: {
-                type: 'heading',
-                label: 'Toggles'
-              },
-              group2: {
-                type: 'toggle',
-                model: ['opt1'],
-                items: [
-                  { label: 'Option 1', value: 'opt1' },
-                  { label: 'Option 2', value: 'opt2', color: 'secondary' },
-                  { label: 'Option 3', value: 'opt3', color: 'amber' }
-                ]
-              }
-            },
-            buttons: [
-              'Cancel',
-              {
-                label: 'Ok',
-                handler(data) {
-                  Toast.create('Returned ' + JSON.stringify(data))
-                }
-              }
-            ]
-          })
-        }
-      },
       packagethis: pkg,
       headerinfo: {
         group: '모니터',

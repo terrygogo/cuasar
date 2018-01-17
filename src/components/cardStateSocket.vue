@@ -1,25 +1,6 @@
 <template>
-  <q-card>
-    <q-card-title class="card-title text-white"  :class="baseColor" >
-      {{cardTitle}}
-       <q-icon slot="right" name="more_vert">
-                  <q-popover ref="popover">
-                    <q-list link class="no-border">
-                      <q-item @click="$refs.popover.close()">
-                        <q-item-main label="자세히보기" />
-                      </q-item>
-                      <q-item @click="$refs.popover.close()">
-                        <q-item-main label="설정보기" />
-                      </q-item>
-                      <q-item @click="$refs.popover.close()">
-                        <q-item-main label="로그보기" />
-                      </q-item>
-                    </q-list>
-                  </q-popover>
-                </q-icon>
-    </q-card-title>
-     
-
+  <card-template  :card-title="cardTitle" :base-color="baseColor" :icon-name="iconName" :what="what"
+                :period="period"  :id="id" >
      <q-card-main class="card-content">
           <div class="row justify-end">
           
@@ -40,7 +21,7 @@
           </q-scroll-area>
           
     </q-card-main>
-  </q-card>
+    </card-template>
 </template>
 
 <script type="text/javascript">
@@ -82,8 +63,9 @@ import {
   QKnob,
   AppFullscreen
 } from 'quasar'
+import cardTemplate from './cardTemplate.vue'
 export default {
-  props: ['what', 'baseColor', 'iconName', 'cardTitle', 'period'],
+  props: ['what', 'baseColor', 'iconName', 'cardTitle', 'period', 'id'],
   created() {
     /*
     var socket = io('http://localhost:8088')
@@ -269,7 +251,8 @@ export default {
     QFixedPosition,
     QItemMain,
     QKnob,
-    AppFullscreen
+    AppFullscreen,
+    cardTemplate
   }
 }
 </script>

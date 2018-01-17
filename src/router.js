@@ -30,10 +30,10 @@ export default new VueRouter({
         //    {path: '', component: load('Hello')},
         // UserProfile will be rendered inside User's <router-view>
         // when /user/:id/profile is matched
-        {path: 'home', component: load('Home'), name: 'Home', meta: { label: '집' }},
+        {path: 'home', component: load('Home'), name: 'Home', meta: { label: '홈' }},
         {path: '', component: load('Home'), name: 'Default', meta: { label: '홈' }},
         {path: 'login', component: load('Login'), name: 'Login', meta: {auth: false, label: '로그인'}},
-        {path: 'dashboard', component: load('Dashboard'), name: 'Dashboard', ref: 'dashboard', meta: {auth: true, label: '대시보드'}},
+        {path: 'dashboard', component: load('Dashboard'), name: 'Dashboard', meta: {auth: undefined, label: '대시보드'}},
         {path: 'cservices', component: load('Cservices'), name: 'ServiceCorebridges', meta: {auth: true, label: 'CoreBridge 서비스'}},
         {path: 'sservices', component: load('Sservices'), name: 'ServiceSystems', meta: {auth: true, label: 'System 서비스'}},
         {path: 'widget_logview', component: load('WidgetLogview'), name: 'WidgetLogview', meta: {auth: true, label: '로그조회'}},

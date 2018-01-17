@@ -1,7 +1,7 @@
 <template>
   <card-template  :card-title="cardTitle" :base-color="baseColor" :icon-name="iconName" :what="what"
                 :period="period"  :id="id" >
- 
+    
     <q-card-main class="card-content">
       <q-list dense link v-for="(value, key) in pre_check()" v-bind:key="12">
         <q-list-header  > {{key}}
@@ -17,7 +17,24 @@
      
       </q-list>
     </q-card-main>
- </card-template>
+    <q-card-actions>
+  <!--
+    Define the buttons to your liking,
+    these are just examples
+  -->
+  <q-btn flat round small><q-icon name="event" /></q-btn>
+  <q-btn flat>5:30PM</q-btn>
+  <q-btn flat>7:30PM</q-btn>
+  <q-btn flat>9:00PM</q-btn>
+  <q-btn flat color="primary">Reserve</q-btn>
+</q-card-actions>
+<!-- Vertical actions -->
+ <q-card-separator />
+<q-card-actions vertical>
+  <q-btn flat>Action 1</q-btn>
+  <q-btn flat>Action 2</q-btn>
+</q-card-actions>
+  </card-template>
 </template>
 
 <script type="text/javascript">
@@ -33,6 +50,7 @@ import {
   QCardTitle,
   QCardSeparator,
   QCardMain,
+  QCardActions,
   QCheckbox,
   QFabAction,
   QRouteTab,
@@ -122,6 +140,7 @@ export default {
     QToolbar,
     QTabs,
     QCard,
+    QCardActions,
     QCheckbox,
     QRouteTab,
     QToolbarTitle,

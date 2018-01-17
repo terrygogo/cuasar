@@ -1,27 +1,34 @@
 <template>
-  <card-template  :card-title="cardTitle" :base-color="baseColor" :icon-name="iconName" :what="what"
-                :period="period"  :id="id" >
- 
+  <q-card>  
+    <q-card-title class="card-title text-white"  :class="baseColor" >
+          <q-icon :name="iconName"></q-icon> 
+      {{cardTitle}}
+       <q-btn slot="right" icon="refresh" round small flat />
+       <q-icon slot="right" name="settings_applications">
+                  <q-popover ref="popover">
+                    <q-list link class="no-border">
+                      <q-item @click="$refs.popover.close()">
+                        <q-item-main label="자세히보기" />
+                      </q-item>
+                      <q-item @click="dashboard_add(), $refs.popover.close()">
+                        <q-item-main label="설정" />
+                      </q-item>
+                      <q-item @click="dashboard_del(), $refs.popover.close()">
+                        <q-item-main label="삭제" />
+                      </q-item>
+                    </q-list>
+                  </q-popover>
+                </q-icon>
+    </q-card-title>
     <q-card-main class="card-content">
-      <q-list dense link v-for="(value, key) in pre_check()" v-bind:key="12">
-        <q-list-header  > {{key}}
-        </q-list-header>
-        <q-item  v-for="(value, key) in value" v-bind:key="11" >
-          <q-item-main>
-            <q-item-tile label>{{key}}</q-item-tile>
-          </q-item-main>
-          <q-item-side>
-           {{value}}
-          </q-item-side>
-        </q-item>
-     
-      </q-list>
+     <slot></slot>
     </q-card-main>
- </card-template>
+    
+  </q-card>
 </template>
 
 <script type="text/javascript">
-import Vue from 'vue'
+// import Vue from 'vue'
 import {
   Toast,
   QAjaxBar,
@@ -32,6 +39,7 @@ import {
   QCard,
   QCardTitle,
   QCardSeparator,
+  QCardActions,
   QCardMain,
   QCheckbox,
   QFabAction,
@@ -55,23 +63,10 @@ import {
   QKnob,
   AppFullscreen
 } from 'quasar'
-import cardTemplate from './cardTemplate.vue'
 export default {
   props: ['what', 'baseColor', 'iconName', 'cardTitle', 'period', 'child_height', 'id'],
   created() {
-    var that = this
-    Vue.axios.get(this.what)
-      .then(function(response) {
-        that.results = response.data
-      })
-    if (this.period > 0) {
-      setInterval(() => {
-        Vue.axios.get(this.what)
-          .then(function(response) {
-            that.results = response.data
-          })
-      }, this.period)
-    }
+
   },
   computed: {
     formatBytes(bytes) {
@@ -84,14 +79,11 @@ export default {
   watch: {
   },
   methods: {
-    pre_check() {
-      var xx
-      for (xx in this.results) {
-        if (typeof this.results[xx] !== 'object') {
-          delete this.results[xx]
-        }
-      }
-      return this.results
+    dashboard_add() {
+      this.$store.commit('dashboard_add_entry', 'mandu')
+    },
+    dashboard_del() {
+      this.$store.commit('dashboard_delete_entry', this.id)
     }
   },
   data() {
@@ -104,13 +96,6 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(function () {
-    // Code that will run only after the
-    // entire view has been rendered
-      var xx = this.$el.clientHeight
-      console.log(xx)
-      this.$emit('update-height', Math.ceil(xx / 7))
-    })
   },
   components: {
     Toast,
@@ -122,6 +107,7 @@ export default {
     QToolbar,
     QTabs,
     QCard,
+    QCardActions,
     QCheckbox,
     QRouteTab,
     QToolbarTitle,
@@ -143,8 +129,7 @@ export default {
     QFixedPosition,
     QItemMain,
     QKnob,
-    AppFullscreen,
-    cardTemplate
+    AppFullscreen
   }
 }
 </script>
